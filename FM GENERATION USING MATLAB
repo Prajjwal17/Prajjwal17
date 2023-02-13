@@ -1,0 +1,46 @@
+clc
+clear all
+close all
+%Am = input('Enter Amplitude (Message) = ');
+%Ac = input('Enter Amplitude (Carrier) = ');
+%fM = input('Enter Message frequency = ');
+%fc = input('Enter Carrier frequency = ');
+%You can use the values as given below or can give your input also
+Am = 5;
+Ac = 10;
+fm = 10;
+fc = 100;
+fs=10*fc;
+t=0:1/fs:1;
+msg = Am*sin(2*pi*fm*t);
+subplot(4,1,1); %plotting message signal
+plot(t,msg);
+xlabel('Time');
+ylabel('Amplitude');
+title('Message Signal');
+
+carr = Ac*sin(2*pi*fc*t);
+subplot(4,1,2); %plotting carrier signal
+plot(t,carr);
+xlabel('Time');
+ylabel('Amplitude');
+title('Carrier Signal');
+kf = 10;
+kp = 1;
+delf = kf*Am;
+beta = delf/fm;
+mp = kp*Am;
+
+y = Ac*cos(2*pi*fc*t+beta.*sin(2*pi*fm*t));
+subplot(4,1,3); %plotting FM(Frequency Modulated) signal
+plot(t,y);
+xlabel('Time');
+ylabel('Amplitude');
+title('FM Signal');
+
+y = Am*cos(2*pi*fc*t+beta.*sin(2*pi*fm*t));
+subplot(4,1,4); %plotting FM(Frequency Modulated) signal
+plot(t,y);
+xlabel('Time');
+ylabel('Amplitude');
+title('PM Signal');
